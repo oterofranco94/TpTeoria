@@ -16,7 +16,7 @@ public class TPTeoria {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        System.out.println("PORTE feo");
+        System.out.println("PORTE asado");
     }
     
 }
