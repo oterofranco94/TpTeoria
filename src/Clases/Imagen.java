@@ -36,7 +36,7 @@ public class Imagen {
         return height;
     }
     
-    public Vector<Integer> getSecuencia() {
+    public Vector<Integer> getSecuencia(BufferedImage image) {
         Vector<Integer> secuencia = new Vector<Integer>();
 	  for (int x = 0; x < width; x++) {
 		  for (int y = 0; y < height; y++) {
@@ -50,43 +50,35 @@ public class Imagen {
   }
     
     public double getMedia (){
-        Vector<Integer> aux = getSecuencia();
         double suma = 0;
-        for (int i=0;i<aux.size();i++){
-            suma+=aux.elementAt(i);}
-           
-        
-        return suma / aux.size();
+        for (int i=0;i<pixeles.size();i++){
+            suma+=pixeles.elementAt(i);}
+        return suma / pixeles.size();
     }
     
     public double getDesvioEstandar(){
-        Vector<Integer> aux = getSecuencia();
         double media = getMedia();
         double varianza = 0;
-        for (int i=0;i<aux.size();i++)
-            varianza += Math.pow((aux.elementAt(i)-media), 2);
+        for (int i=0;i<pixeles.size();i++)
+            varianza += Math.pow((pixeles.elementAt(i)-media), 2);
         
-        return Math.sqrt(varianza/aux.size());
+        return Math.sqrt(varianza/pixeles.size());
     }
     
     public double getCovarianza (Imagen imagenB){
-        
-        Vector<Integer> secuenciaA = getSecuencia();
-        Vector<Integer> secuenciaB = imagenB.getSecuencia();
+        Vector<Integer> secuenciaB = imagenB.pixeles;
         double mediaA = getMedia();
         double mediaB = imagenB.getMedia();
         double covarianza = 0;
-        for (int i=0;i<secuenciaA.size();i++){
-            covarianza+= ( (secuenciaA.elementAt(i)-mediaA)*(secuenciaB.elementAt(i)-mediaB))/secuenciaA.size();
+        for (int i=0;i<pixeles.size();i++){
+            covarianza+= ( (pixeles.elementAt(i)-mediaA)*(secuenciaB.elementAt(i)-mediaB))/pixeles.size();
         }
-        
         return covarianza;
     }
     
     public double getFactorCorrelacion(Imagen imagenB){
         
         double factor = (getCovarianza(imagenB)/(getDesvioEstandar()*imagenB.getDesvioEstandar()));
-        
         return factor;
     }
     
