@@ -11,19 +11,15 @@ import javax.imageio.stream.ImageInputStream;
 
 
 public class Imagen {
-    private static int colores = 256;
-    private static int width=1310;
-    private static int height=1700;
-    private static BufferedImage image;
+    private static int width = 1310;
+    private static int height = 1700;
+    public Vector<Integer> pixeles = new Vector<Integer>();
     
     public Imagen(String path) {
     try 
     {
-      image = ImageIO.read(this.getClass().getResource(path));
-      this.width = image.getWidth();
-      this.height = image.getHeight();
-      
-      //getSecuencia(image);
+      BufferedImage image = ImageIO.read(this.getClass().getResource(path));
+      pixeles = getSecuencia(image);
     } 
     catch (IOException e) 
     {
