@@ -14,19 +14,23 @@ public class Imagen {
     private static int width = 1310;
     private static int height = 1700;
     public Vector<Integer> pixeles = new Vector<Integer>();
+    public String name;
+    public double correlacionConOriginal = 0.0;
     
-    public Imagen(String path) {
+    public Imagen(String name, String path, Imagen original) {
     try 
     {
+      this.name = name;
       BufferedImage image = ImageIO.read(this.getClass().getResource(path));
       pixeles = getSecuencia(image);
+      if (original != null)
+        correlacionConOriginal = getFactorCorrelacion(original);
     } 
     catch (IOException e) 
     {
       System.err.println(e.getMessage());
     }
-  }
-    
+    }
     
     public int getWidth(){
         return width;
@@ -76,10 +80,8 @@ public class Imagen {
         return covarianza;
     }
     
-    public double getFactorCorrelacion(Imagen imagenB){
-        
-        double factor = (getCovarianza(imagenB)/(getDesvioEstandar()*imagenB.getDesvioEstandar()));
-        return factor;
+    public double getFactorCorrelacion(Imagen original){
+        return (getCovarianza(original)/(getDesvioEstandar()*original.getDesvioEstandar()));
     }
     
     
