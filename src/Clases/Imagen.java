@@ -11,6 +11,7 @@ import javax.imageio.stream.ImageInputStream;
 
 
 public class Imagen {
+    public  String name;
     private static int width = 1310;
     private static int height = 1700;
     public Vector<Integer> pixeles = new Vector<Integer>();
@@ -64,9 +65,9 @@ public class Imagen {
         double media = getMedia();
         double varianza = 0;
         for (int i=0;i<pixeles.size();i++)
-            varianza += Math.pow((pixeles.elementAt(i)-media), 2);
+            varianza += Math.pow((pixeles.elementAt(i)-media), 2)/pixeles.size();
         
-        return Math.sqrt(varianza/pixeles.size());
+        return Math.sqrt(varianza);
     }
     
     public double getCovarianza (Imagen imagenB){
