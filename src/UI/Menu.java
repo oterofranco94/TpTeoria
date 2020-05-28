@@ -10,6 +10,7 @@ import java.awt.Dialog.ModalityType;
 import java.util.Collection;
 import java.util.Vector;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,10 +18,14 @@ import javax.swing.JDialog;
  */
 public class Menu extends javax.swing.JFrame {
 
-    public Vector<Imagen> imagenes = new Vector<Imagen>();
-    public Menu(Vector<Imagen> imagenes) {
+    public Vector<Imagen> imagenes1 = new Vector<Imagen>();
+    public Vector<Imagen> imagenes2 = new Vector<Imagen>();
+    public boolean accesoEjer2=false;
+    
+    public Menu(Vector<Imagen> imagenes1, Vector<Imagen> imagenes2) {
         initComponents();     
-        this.imagenes=imagenes;
+        this.imagenes1=imagenes1;
+        this.imagenes2=imagenes2;
     }
 
     private Menu() {
@@ -77,6 +82,11 @@ public class Menu extends javax.swing.JFrame {
         });
 
         jButton2.setText("Seleccionar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Seleccionar");
 
@@ -194,16 +204,31 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    //this.imagenes.sort();//factor de correlacion
-      try {
-        Ejercicio1 dialog = new Ejercicio1(new javax.swing.JDialog(), true, imagenes);
+    try {
+        Ejercicio1 dialog = new Ejercicio1(new javax.swing.JDialog(), true, imagenes1);
+        dialog.setModalityType(ModalityType.APPLICATION_MODAL);
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        dialog.setVisible(true);
+        accesoEjer2=true;
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    if(accesoEjer2){
+        try {
+        Ejercicio2 dialog = new Ejercicio2(new javax.swing.JDialog(), true, imagenes2);
         dialog.setModalityType(ModalityType.APPLICATION_MODAL);
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         dialog.setVisible(true);
     } catch (Exception ex) {
         ex.printStackTrace();
+    }}
+    else {
+       JOptionPane.showMessageDialog(null, "Se debe Ejecutar el Ejercicio 1 anteriormente.");
     }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

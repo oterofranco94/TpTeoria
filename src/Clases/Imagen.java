@@ -90,4 +90,6 @@ public class Imagen implements Comparable <Imagen> {
     public int compareTo(Imagen img){
         return img.correlacionConOriginal.compareTo(this.correlacionConOriginal);
    }
+    
+    
 }
