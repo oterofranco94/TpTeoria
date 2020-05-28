@@ -10,13 +10,12 @@ import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageInputStream;
 
 
-public class Imagen {
+public class Imagen implements Comparable <Imagen> {
     public  String name;
     private static int width = 1310;
     private static int height = 1700;
     public Vector<Integer> pixeles = new Vector<Integer>();
-    public String name;
-    public double correlacionConOriginal = 0.0;
+    public Double correlacionConOriginal = 0.0;
     
     public Imagen(String name, String path, Imagen original) {
     try 
@@ -26,6 +25,8 @@ public class Imagen {
       pixeles = getSecuencia(image);
       if (original != null)
         correlacionConOriginal = getFactorCorrelacion(original);
+      else 
+          correlacionConOriginal = 0d;
     } 
     catch (IOException e) 
     {
@@ -84,7 +85,9 @@ public class Imagen {
     public double getFactorCorrelacion(Imagen original){
         return (getCovarianza(original)/(getDesvioEstandar()*original.getDesvioEstandar()));
     }
-    
-    
- 
+     
+    @Override
+    public int compareTo(Imagen img){
+        return img.correlacionConOriginal.compareTo(this.correlacionConOriginal);
+   }
 }
