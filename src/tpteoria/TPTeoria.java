@@ -7,6 +7,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Vector;
 import javax.imageio.ImageIO;
@@ -28,6 +30,8 @@ public class TPTeoria {
         imagenes.add(will3);
         imagenes.add(will4);
         imagenes.add(will5);
+        Collections.sort(imagenes);
+        
         Menu ui = new Menu(imagenes);
         ui.setVisible (true);
     }
