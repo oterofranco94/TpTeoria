@@ -5,9 +5,18 @@
  */
 package UI;
 
-import Clases.Imagen;
+import Clases.*;
 import java.util.Vector;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.statistics.HistogramDataset;
+import org.jfree.ui.RefineryUtilities;
 
 /**
  *
@@ -21,6 +30,18 @@ public class Ejercicio2 extends javax.swing.JDialog {
     public Ejercicio2(javax.swing.JDialog parent, boolean modal, Vector<Imagen> datos) {
         super(parent, modal);
         initComponents();
+        
+        h1 = new Histograma (("Histograma "+datos.elementAt(0).name), datos.elementAt(0).devolverEnArreglo());
+        h2 = new Histograma (("Histograma "+datos.elementAt(1).name), datos.elementAt(1).devolverEnArreglo());
+        h3 = new Histograma (("Histograma "+datos.elementAt(2).name), datos.elementAt(2).devolverEnArreglo());
+        h1.pack();
+        h2.pack();
+        h3.pack();
+       
+     
+       
+        
+        
         txt0.setText(datos.elementAt(0).name);
         txt1.setText(String.valueOf(datos.elementAt(0).getMedia()));
         txt2.setText(String.valueOf(datos.elementAt(0).getDesvioEstandar()));
@@ -71,6 +92,9 @@ public class Ejercicio2 extends javax.swing.JDialog {
         txt6 = new javax.swing.JLabel();
         txt7 = new javax.swing.JLabel();
         txt8 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -161,6 +185,30 @@ public class Ejercicio2 extends javax.swing.JDialog {
         txt8.setText("2");
         jPanel1.add(txt8, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 140, -1, -1));
 
+        jButton1.setText("Ver Histograma");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, -1, -1));
+
+        jButton2.setText("Ver Histograma");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 270, -1, -1));
+
+        jButton3.setText("Ver Histograma");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 270, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -175,6 +223,27 @@ public class Ejercicio2 extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            h1.setVisible(true);
+            h1.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            h1.setLocationRelativeTo(this);
+            h1.toFront();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+            h2.setVisible(true);
+            h2.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            h2.setLocationRelativeTo(this);
+            h2.toFront();// TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+            h3.setVisible(true);
+            h3.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            h3.setLocationRelativeTo(this);
+            h3.toFront();// TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -217,8 +286,15 @@ public class Ejercicio2 extends javax.swing.JDialog {
             }
         });
     }
+    
+    private Histograma h1;
+    private Histograma h2;
+    private Histograma h3;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

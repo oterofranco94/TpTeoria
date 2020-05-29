@@ -218,7 +218,7 @@ public class Menu extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
     if(accesoEjer2){
         try {
-        Ejercicio2 dialog = new Ejercicio2(new javax.swing.JDialog(), true, imagenes2);
+        Ejercicio2 dialog = new Ejercicio2(new javax.swing.JDialog(), true, imagenes2 );
         dialog.setModalityType(ModalityType.APPLICATION_MODAL);
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         dialog.setVisible(true);

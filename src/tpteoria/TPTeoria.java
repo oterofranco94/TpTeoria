@@ -13,6 +13,12 @@ import java.util.Iterator;
 import java.util.Vector;
 import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageInputStream;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.chart.plot.PlotOrientation;
+
 
 
 public class TPTeoria {
@@ -24,7 +30,7 @@ public class TPTeoria {
         Imagen will4 = new Imagen("Will 4", "../Imagenes/Will_4.bmp", willOriginal);
         Imagen will5 = new Imagen("Will 5", "../Imagenes/Will_5.bmp", willOriginal); 
         Imagen willEj2 = new Imagen("Will Ej2", "../Imagenes/Will_ej2.bmp", null); 
-        Vector<Imagen> imagenes1 = new Vector<Imagen>();
+        Vector<Imagen> imagenes1 = new Vector<>();
         imagenes1.add(will1);
         imagenes1.add(will2);
         imagenes1.add(will3);
@@ -32,11 +38,10 @@ public class TPTeoria {
         imagenes1.add(will5);
         Collections.sort(imagenes1);
         
-        Vector<Imagen> imagenes2 = new Vector<Imagen>();
+        Vector<Imagen> imagenes2 = new Vector<>();
         imagenes2.add(willOriginal);
         imagenes2.add(imagenes1.elementAt(0));
-        imagenes2.add(willEj2);
-               
+        imagenes2.add(willEj2);       
         Menu ui = new Menu(imagenes1, imagenes2);
         ui.setVisible (true);
     }

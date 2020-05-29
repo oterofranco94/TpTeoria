@@ -9,6 +9,8 @@ import java.util.Vector;
 import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageInputStream;
 
+import org.jfree.data.category.DefaultCategoryDataset;
+
 
 public class Imagen implements Comparable <Imagen> {
     public  String name;
@@ -44,17 +46,32 @@ public class Imagen implements Comparable <Imagen> {
     
     public Vector<Integer> getSecuencia(BufferedImage image) {
         Vector<Integer> secuencia = new Vector<Integer>();
-	  for (int x = 0; x < width; x++) {
+        int rgb;
+        int codigo;
+      	  for (int x = 0; x < width; x++) {
 		  for (int y = 0; y < height; y++) {
-			  int rgb = image.getRGB(x, y);
+			  rgb = image.getRGB(x, y);
 			  Color color = new Color(rgb, true);
-			  int codigo= color.getRed();
+			  codigo = color.getRed();
 			  secuencia.add(codigo);
 		  }
 	  }
           return secuencia;
   }
     
+    
+   public Vector<Integer> getSecuencia(){
+       return pixeles;
+   }
+   
+   public  double [] devolverEnArreglo(){
+       double [] aux   = new double[pixeles.size()];
+       for (int i= 0; i<pixeles.size();i++){
+             aux[i] = (double)pixeles.elementAt(i);
+         }
+       return aux;
+   }
+   
     public double getMedia (){
         double suma = 0;
         for (int i=0;i<pixeles.size();i++){
@@ -91,5 +108,8 @@ public class Imagen implements Comparable <Imagen> {
         return img.correlacionConOriginal.compareTo(this.correlacionConOriginal);
    }
     
+    public double cantidadDePixeles(){
+        return pixeles.size();
+    }
     
 }
