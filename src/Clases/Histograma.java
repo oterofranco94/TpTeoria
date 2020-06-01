@@ -14,36 +14,32 @@ import org.jfree.data.statistics.HistogramDataset;
 import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.ui.ApplicationFrame;
 
-public class Histograma extends ApplicationFrame {
+public class Histograma extends javax.swing.JDialog {
+    public String title;
 
     public Histograma(String title, double [] vector) {
-        
-        super(title);
+        this.title=title;
         JPanel chartPanel = crearPanel(title, vector);
         chartPanel.setPreferredSize(new java.awt.Dimension(500, 475));
         super.setContentPane(chartPanel);
-        super.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
-    
-       
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 }
 
-    private static IntervalXYDataset crearDataset( double [] vector) {
+    private IntervalXYDataset crearDataset( double [] vector) {
         HistogramDataset dataset = new HistogramDataset();
         dataset.addSeries("Intensidad", vector, 26);
-        
-  return dataset;
+        return dataset;
 }
 
-    private static JFreeChart crearChart(IntervalXYDataset dataset) {
-        JFreeChart chart = ChartFactory.createHistogram(null, "Intensidad", "Cantida de Pixeles", dataset, PlotOrientation.VERTICAL, true, true, false);
+    private JFreeChart crearChart(IntervalXYDataset dataset) {
+        JFreeChart chart = ChartFactory.createHistogram(this.title, "Intensidad", "Cantida de Pixeles", dataset, PlotOrientation.VERTICAL, true, true, false);
         XYPlot plot = (XYPlot) chart.getPlot();
         XYBarRenderer renderer = (XYBarRenderer) plot.getRenderer();
        // renderer.setDrawBarOutline(false);
   
 return chart;
 }
-    public static JPanel crearPanel(String name, double [] vector) {
+    public JPanel crearPanel(String name, double [] vector) {
         JFreeChart chart = crearChart(crearDataset(vector));
         return new ChartPanel(chart);
 }

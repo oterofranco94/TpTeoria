@@ -23,13 +23,13 @@ import org.jfree.chart.plot.PlotOrientation;
 
 public class TPTeoria {
     public static void main(String[] args) throws FileNotFoundException, IOException {
-        Imagen willOriginal = new Imagen("Will Original", "../Imagenes/Will(Original).bmp", null);
-        Imagen will1 = new Imagen("Will 1", "../Imagenes/Will_1.bmp", willOriginal);
-        Imagen will2 = new Imagen("Will 2", "../Imagenes/Will_2.bmp", willOriginal);
-        Imagen will3 = new Imagen("Will 3", "../Imagenes/Will_3.bmp", willOriginal);
-        Imagen will4 = new Imagen("Will 4", "../Imagenes/Will_4.bmp", willOriginal);
-        Imagen will5 = new Imagen("Will 5", "../Imagenes/Will_5.bmp", willOriginal); 
-        Imagen willEj2 = new Imagen("Will Ej2", "../Imagenes/Will_ej2.bmp", null); 
+        Imagen willOriginal = new Imagen("Will Original", "/Imagenes/Will(Original).bmp", null);
+        Imagen will1 = new Imagen("Will 1", "/Imagenes/Will_1.bmp", willOriginal);
+        Imagen will2 = new Imagen("Will 2", "/Imagenes/Will_2.bmp", willOriginal);
+        Imagen will3 = new Imagen("Will 3", "/Imagenes/Will_3.bmp", willOriginal);
+        Imagen will4 = new Imagen("Will 4", "/Imagenes/Will_4.bmp", willOriginal);
+        Imagen will5 = new Imagen("Will 5", "/Imagenes/Will_5.bmp", willOriginal); 
+        Imagen willEj2 = new Imagen("Will Ej2", "/Imagenes/Will_ej2.bmp", null); 
         Vector<Imagen> imagenes1 = new Vector<>();
         imagenes1.add(will1);
         imagenes1.add(will2);
