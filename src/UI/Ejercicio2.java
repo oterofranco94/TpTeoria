@@ -22,13 +22,13 @@ import org.jfree.ui.RefineryUtilities;
  *
  * @author francootero
  */
-public class Ejercicio2 extends javax.swing.JDialog {
+public class Ejercicio2 extends javax.swing.JFrame {
 
     /**
      * Creates new form Ejercicio2
      */
-    public Ejercicio2(javax.swing.JDialog parent, boolean modal, Vector<Imagen> datos) {
-        super(parent, modal);
+    public Ejercicio2(javax.swing.JFrame parent, boolean modal, Vector<Imagen> datos) {
+        //super(parent, modal);
         initComponents();
         
         h1 = new Histograma (("Histograma "+datos.elementAt(0).name), datos.elementAt(0).devolverEnArreglo());
@@ -55,6 +55,10 @@ public class Ejercicio2 extends javax.swing.JDialog {
     }
 
     private Ejercicio2(JDialog jDialog, boolean b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private Ejercicio2() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -275,7 +279,7 @@ public class Ejercicio2 extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Ejercicio2 dialog = new Ejercicio2(new javax.swing.JDialog(), true);
+                Ejercicio2 dialog = new Ejercicio2();
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
