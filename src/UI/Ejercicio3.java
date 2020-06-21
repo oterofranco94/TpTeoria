@@ -59,7 +59,7 @@ public class Ejercicio3 extends javax.swing.JFrame {
 
         jLabel4.setText("Comprimir la imagen que trajo el policía utilizando Huffman semi-estático, esta vez utilizando el código generado para la propia imagen.");
 
-        jLabel5.setText("Comparar las tasas de compresión obtenida. ");
+        jLabel5.setText("Comparar las tasas de compresión obtenidas. ");
 
         jLabel6.setFont(new java.awt.Font("Euphemia UCAS", 0, 18)); // NOI18N
         jLabel6.setText("Compresión de Imagenes:");
