@@ -7,9 +7,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Vector;
 import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageInputStream;
@@ -46,19 +48,9 @@ public class TPTeoria {
         Vector<Imagen> imagenes3 = new Vector<>();
         imagenes3.add(willOriginal);
         imagenes3.add(willEj2);
-        //Menu ui = new Menu(imagenes1, imagenes2, imagenes3);
-        //ui.setVisible (true);
-        Vector<SimboloProbabilidad> distribucionOriginal = willOriginal.getProbabilidades();
-        Collections.sort(distribucionOriginal);
-        for (SimboloProbabilidad s: distribucionOriginal){
-            System.out.print("Simbolo: "+s.getSimbolo()+" - Probabilidad: " +s.getProbabilidad() + "\n");
-        }
+        Menu ui = new Menu(imagenes1, imagenes2, imagenes3);
+        ui.setVisible (true);
         
-       Vector<Codificacion> originalCodificado = willOriginal.getSimbolosCodificados();
-       
-        for (Codificacion c: originalCodificado){
-            System.out.print( "Simbolo : "+ c.getSimbolo()+" Codigo: "+c.getCodigo()+" Longitud: "+ c.getLongitud()+"\n");
-        }
         
         
 }
