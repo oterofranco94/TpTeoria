@@ -32,7 +32,7 @@ public class TPTeoria {
         Imagen will4 = new Imagen("Will 4", "/Imagenes/Will_4.bmp", willOriginal);
         Imagen will5 = new Imagen("Will 5", "/Imagenes/Will_5.bmp", willOriginal); 
         Imagen willEj2 = new Imagen("Will Ej2", "/Imagenes/Will_ej2.bmp", null); 
-        Vector<Imagen> imagenes1 = new Vector<>();
+        Vector<Imagen> imagenes1 = new Vector<Imagen>();
         imagenes1.add(will1);
         imagenes1.add(will2);
         imagenes1.add(will3);
@@ -40,15 +40,18 @@ public class TPTeoria {
         imagenes1.add(will5);
         Collections.sort(imagenes1);
         
-        Vector<Imagen> imagenes2 = new Vector<>();
+        Vector<Imagen> imagenes2 = new Vector<Imagen>();
         imagenes2.add(willOriginal);
         imagenes2.add(imagenes1.elementAt(0));
         imagenes2.add(willEj2);       
         
-        Vector<Imagen> imagenes3 = new Vector<>();
+        Vector<Imagen> imagenes3 = new Vector<Imagen>();
         imagenes3.add(willOriginal);
         imagenes3.add(willEj2);
-        Menu ui = new Menu(imagenes1, imagenes2, imagenes3);
+        
+        Vector<Imagen> imagenes4 = new Vector<Imagen>();
+        
+        Menu ui = new Menu(imagenes1, imagenes2, imagenes3, imagenes4);
         ui.setVisible (true);
         
         
