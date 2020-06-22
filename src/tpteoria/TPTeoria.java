@@ -25,7 +25,7 @@ import org.jfree.chart.plot.PlotOrientation;
 
 public class TPTeoria {
     public static void main(String[] args) throws FileNotFoundException, IOException {
-        Imagen willOriginal = new Imagen("Will Original", "/Imagenes/Will(Original).bmp", null);
+       Imagen willOriginal = new Imagen("Will Original", "/Imagenes/Will(Original).bmp", null);
         Imagen will1 = new Imagen("Will 1", "/Imagenes/Will_1.bmp", willOriginal);
         Imagen will2 = new Imagen("Will 2", "/Imagenes/Will_2.bmp", willOriginal);
         Imagen will3 = new Imagen("Will 3", "/Imagenes/Will_3.bmp", willOriginal);
@@ -44,14 +44,14 @@ public class TPTeoria {
         imagenes2.add(willOriginal);
         imagenes2.add(imagenes1.elementAt(0));
         imagenes2.add(willEj2);       
-        
+
         Vector<Imagen> imagenes3 = new Vector<Imagen>();
         imagenes3.add(willOriginal);
+        imagenes3.add(imagenes1.elementAt(0));
         imagenes3.add(willEj2);
-        
         Vector<Imagen> imagenes4 = new Vector<Imagen>();
         
-        Menu ui = new Menu(imagenes1, imagenes2, imagenes3, imagenes4);
+       Menu ui = new Menu(imagenes1, imagenes2, imagenes3, imagenes4);
         ui.setVisible (true);
         
         

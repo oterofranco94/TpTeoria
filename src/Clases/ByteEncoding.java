@@ -31,36 +31,38 @@ public class ByteEncoding {
     private static int height = 1700;
     private static int bufferLength = 8;
 
-    private static String getCodigo(Integer intensidad, Vector<Codificacion> codificacion) {
+    private static String getCodigo(int intensidad, Vector<Codificacion> codificacion) {
         for (int i = 0; i < codificacion.size(); i++) {
-            if (codificacion.get(i).getSimbolo() == intensidad) {
+            if ((int) codificacion.get(i).getSimbolo() == (intensidad)) {
                 return codificacion.get(i).getCodigo();
             }
         }
+        System.out.print("Codigo inexistente");
         return "";
     }
 
-    private void encodeSequence(String outputfilepath, Vector<Integer> secuencia, Vector<Codificacion> codificacion, int[] cantidades) {
+    public void encodeSequence( Vector<Integer> secuencia, Vector<Codificacion> codificacion, Vector<Integer> simbolos, int[] cantidades, String outputfilepath) {
         try {
-            
+
             String secuenciaCodificada = "";
             char buffer = 0;
             int bufferPos = 0;
             int longSimbolo = 0;
             String codigo;
-            for (int i = 0; i < secuencia.size(); i++) {
-                codigo = getCodigo(secuencia.get(i), codificacion);
+            for (Integer i : secuencia) {
+                codigo = getCodigo((int) i, codificacion);
                 longSimbolo = codigo.length();
                 while (longSimbolo > 0) {
                     // La operación de corrimiento pone un '0'
                     buffer = (char) (buffer << 1);
-                    bufferPos++;
                     if (codigo.charAt(0) == '1') {
                         buffer = (char) (buffer | '\u0001');
                     }
+
                     if (codigo.length() > 1) {
                         codigo = codigo.substring(1);
                     }
+
                     bufferPos++;
                     longSimbolo--;
                     if (bufferPos == bufferLength) {
@@ -79,11 +81,10 @@ public class ByteEncoding {
                 secuenciaCodificada = secuenciaCodificada + buffer;
             }
 
-            
-            FileOutputStream fos = new FileOutputStream(outputfilepath);
-
+            FileOutputStream fos = new FileOutputStream(new File(outputfilepath));
             for (int i = 0; i < colores; i++) {
-                int simbolo = (int) codificacion.get(i).getSimbolo();
+
+                int simbolo = (int) simbolos.get(i);
                 fos.write((char) simbolo);
             }
 
@@ -110,7 +111,7 @@ public class ByteEncoding {
                 }
 
             }
-            
+
             fos.write((char) cerosSobrantes);
             int cantidadwidth = width / 255;
             fos.write(cantidadwidth);
@@ -121,176 +122,179 @@ public class ByteEncoding {
             for (int j = 0; j < secuenciaCodificada.length(); j++) {
                 fos.write(secuenciaCodificada.charAt(j));
             }
-            
+
             fos.close();
+            
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
-    private void decodeSequence(String inputFilepath, String newFilepath) {
-        
-        try{
+    public void decodeSequence(String inputFilepath, String newFilepath) {
+
+        try {
             FileInputStream fis = new FileInputStream(inputFilepath);
-            Vector<Integer>simbolos =new Vector<Integer>();
-            Vector<Integer>cantidades = new Vector<Integer>();
-            
-            for(int i=0;i<colores;i++){
-                simbolos.add((int)fis.read());
+            Vector<Integer> simbolos = new Vector<Integer>();
+            Vector<Integer> cantidades = new Vector<Integer>();
+
+            for (int i = 0; i < colores; i++) {
+                simbolos.add((int) fis.read());
             }
             int cantidad;
             char cod;
-            for (int j=0;j<colores;j++){
-                cod = (char)fis.read();
-                if (cod == 'c'){
-                    cantidad = (int)fis.read();
-                    cantidad=cantidad*255;
-                    cantidad=cantidad + (int)fis.read();
-                    cantidad=cantidad *255;
-                    cantidad = cantidad + (int)fis.read();
+            for (int j = 0; j < colores; j++) {
+                cod = (char) fis.read();
+                if (cod == 'c') {
+                    cantidad = (int) fis.read();
+                    cantidad = cantidad * 255;
+                    cantidad = cantidad + (int) fis.read();
+                    cantidad = cantidad * 255;
+                    cantidad = cantidad + (int) fis.read();
                     cantidades.add(cantidad);
-            }else if (cod == 's'){
-                cantidad = (int)fis.read();
-                cantidad = cantidad *255;
-                cantidad = cantidad + (int)fis.read();
-                cantidades.add(cantidad);
+                } else if (cod == 's') {
+                    cantidad = (int) fis.read();
+                    cantidad = cantidad * 255;
+                    cantidad = cantidad + (int) fis.read();
+                    cantidades.add(cantidad);
+                }
             }
-            }
-            int cerosAgregados = (int)fis.read();
-            
-            int ancho = (int)fis.read() * 255;
-            ancho += (int)fis.read();
-            
-            int alto = (int)fis.read() *255;
-            alto += (int)fis.read();
-            
-            int cantidadPixeles = ancho*alto;
-            
-            Vector<SimboloProbabilidad> probabilidades = getProbabilidades (simbolos, cantidades, cantidadPixeles);    
-            
-            Vector<NodoArbol> arbolHuffmann = arbolDeHuffmann (probabilidades);
-            
-            Vector<Codificacion>  codificacion = getSimbolosCodificados (arbolHuffmann);
-            
+            int cerosAgregados = (int) fis.read();
+
+            int ancho = (int) fis.read() * 255;
+            ancho += (int) fis.read();
+
+            int alto = (int) fis.read() * 255;
+            alto += (int) fis.read();
+
+            int cantidadPixeles = ancho * alto;
+
+            Vector<SimboloProbabilidad> probabilidades = getProbabilidades(simbolos, cantidades, cantidadPixeles);
+
+            Vector<NodoArbol> arbolHuffmann = arbolDeHuffmann(probabilidades);
+
+            Vector<Codificacion> codificacion = getSimbolosCodificados(arbolHuffmann);
+
             Vector<Integer> secuenciaRestaurada = new Vector<Integer>();
-            
-            
-            int globalIndex = 0;
-            char mask = '\u0080'; // mask: 10000000
+
+
             int bufferPos = 0;
-         //   int i = 0;
-            
+            //   int i = 0;
+
             String secuencia = "";
             char byteActual;
             boolean verifica = false;
-            String a; 
-            //String b;
-            while (fis.available()!=0){
-                byteActual = (char)fis.read();
-                if (fis.available()==0){
-                    for (int i=0; i < bufferLength-cerosAgregados;i++){
-                        if ((byteActual & mask) == mask)
+            String a;
+            String aux;
+            int sumados = 0;
+            int bytesleidos = 0;
+
+            while (fis.available() != 0) {
+                byteActual = (char) fis.read();
+                bytesleidos++;
+                if (fis.available() == 0) {
+                    for (int i = 0; i < bufferLength - cerosAgregados; i++) {
+                        if ((byteActual & '\u0080') == '\u0080') {
                             secuencia = secuencia + '1';
-                        else
+                        } else {
                             secuencia = secuencia + '0';
                         }
-                    
-                    byteActual = (char) (byteActual << 1);
-                    int j = 0;
-                    while ((j<codificacion.size()) && (verifica == false)){
-                                a = codificacion.get(j).getCodigo();
-                                //b = secuencia;
-                                if (a.equals(secuencia))
-                                    verifica =true;
-                                    else
-                                    j++;}
-                            if (verifica){
-                                secuenciaRestaurada.add(codificacion.get(j).getSimbolo());
-                                secuencia = "";
-                                verifica =false; }
-               }
-                else{
-                        for (int i=0;i<bufferLength;i++){
-                            if ((byteActual&mask)==mask)
-                                secuencia = secuencia + '1';
-                            else
-                                secuencia = secuencia + '0'; 
-                            byteActual = (char)(byteActual<<1);
-                            int j = 0;
-                          
-                            while ((j<codificacion.size()) && (verifica == false)){
-                                a = codificacion.get(j).getCodigo();
-                                //b = secuencia;
-                                if (a.equals(secuencia))
-                                    verifica =true;
-                                    else
-                                    j++;}
-                            if (verifica){
-                                secuenciaRestaurada.add(codificacion.get(j).getSimbolo());
-                                secuencia = "";
-                                verifica =false; }
-                        }
-                        
-                        
-               BufferedImage bufferedImage = new BufferedImage(ancho,alto, BufferedImage.TYPE_INT_RGB);
-               Graphics2D g2 = bufferedImage.createGraphics();
-               g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-               g2.setColor(Color.black);
-               g2.fillRect(0, 0, ancho, alto);     
-               
-               
-               
-               int nodo = 0;
-               int r;
-               int g; 
-               int b;
-               for  (int i=0;i<alto;i++){
-                   for(int j=0;j<ancho;j++){
-                       r = secuenciaRestaurada.get(nodo);
-                       nodo++;
-                       g=r;
-                       b=r;
-                       Color color = new Color(r,g,b);
-                       bufferedImage.setRGB(j, i, color.getRGB());
-                       
-                   }
-               }
-               g2.dispose();
-               
-               ImageIO.write(bufferedImage, "bmp", new File (newFilepath));
-                        
-                
 
- }}
+                        byteActual = (char) (byteActual << 1);
+                        int j = 0;
+                        while ((j < codificacion.size()) && (verifica == false)) {
+                            a = codificacion.get(j).getCodigo();
+                            aux = secuencia;
+                            if (a.equals(aux)) {
+                                verifica = true;
+                                sumados++;
+                            } else {
+                                j++;
+                            }
+                        }
+
+                        if (verifica) {
+                            secuenciaRestaurada.add(codificacion.get(j).getSimbolo());
+                            secuencia = "";
+                            verifica = false;
+                        }
+                    }
+                } else {
+
+                    for (int i = 0; i < bufferLength; i++) {
+                        if ((byteActual & '\u0080') == '\u0080') {
+                            secuencia = secuencia + '1';
+                        } else {
+                            secuencia = secuencia + '0';
+                        }
+                        byteActual = (char) (byteActual << 1);
+                        int j = 0;
+
+                        while ((j < codificacion.size()) && (verifica == false)) {
+                            a = codificacion.get(j).getCodigo();
+                            aux = secuencia;
+                            if (a.equals(aux)) {
+                                verifica = true;
+                                sumados++;
+                            } else {
+                                j++;
+                            }
+                        }
+                        if (verifica) {
+                            secuenciaRestaurada.add(codificacion.get(j).getSimbolo());
+                            secuencia = "";
+                            verifica = false;
+                        }
+                    }
+                }
+
+            }
+
+            BufferedImage bufferedImage = new BufferedImage(ancho, alto,BufferedImage.TYPE_BYTE_INDEXED); //BufferedImage.TYPE_INT_RGB);
+            Graphics2D g2 = bufferedImage.createGraphics();
+            //g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+           
+            g2.fillRect(0, 0, ancho, alto);
+
+            int nodo = 0;
+            int r = 0;
+            //int g = 0;
+            //int b = 0;
+            
+            for (int i = 0; i < ancho; i++) {
+                for (int j = 0; j < alto; j++) {
+
+                    r = (int)secuenciaRestaurada.elementAt(nodo);
+                    nodo++;
+                    
+                    Color color = new Color(r, r, r);
+                    
+                    bufferedImage.setRGB(i, j, color.getRGB());
+                   
+                }
+            }
+
+            g2.dispose();
+
+            ImageIO.write(bufferedImage, "bmp", new File(newFilepath));
+
 
         } catch (IOException e1) {
             e1.printStackTrace();
         }
     }
 
-    public void codificarConHuffMann(Imagen img, Vector<Codificacion> codificacion, String outputfilepath) {
+    public static Vector<SimboloProbabilidad> getProbabilidades(Vector<Integer> simbolos, Vector<Integer> cantidades, int cantidadPixeles) {
 
-        int colores = img.getColores();
-        int[] cantidades = new int[colores]; // cantidad de veces que aparece ese color
-        Vector<SimboloProbabilidad> probaOriginal = img.getProbabilidades(cantidades);
-
-        encodeSequence(outputfilepath, img.getSecuencia(), codificacion, cantidades);
-}
-
-
-
-public static Vector<SimboloProbabilidad> getProbabilidades (Vector<Integer> simbolos, Vector<Integer> cantidades, int cantidadPixeles){
-    
         Vector<SimboloProbabilidad> probabilidades = new Vector<SimboloProbabilidad>();
-        for (int i=0; i<colores;i++){
-            SimboloProbabilidad sp = new SimboloProbabilidad (simbolos.get(i),(double)cantidades.get(i)/cantidadPixeles);
+        for (int i = 0; i < colores; i++) {
+            SimboloProbabilidad sp = new SimboloProbabilidad(simbolos.get(i), (double) cantidades.get(i) / cantidadPixeles);
             probabilidades.add(sp);
         }
-            
-        return probabilidades;
-}
 
+        return probabilidades;
+    }
 
     public Vector<NodoArbol> arbolDeHuffmann(Vector<SimboloProbabilidad> probabilidades) {
         Collections.sort(probabilidades);
@@ -369,7 +373,5 @@ public static Vector<SimboloProbabilidad> getProbabilidades (Vector<Integer> sim
 
         }
     }
-
-
 
 }

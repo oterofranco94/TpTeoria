@@ -137,13 +137,12 @@ public class Imagen implements Comparable<Imagen> {
         return distribucion;
     }
     
-    public Vector<SimboloProbabilidad> getProbabilidades(int [] suma){
+    public Vector<SimboloProbabilidad> getProbabilidades(Vector<Integer> simbolos, int [] suma){
                 
         Vector<SimboloProbabilidad> distribucion = new Vector<SimboloProbabilidad>();
         for (int i = 0; i < colores; i++) {
             suma[i] = 0;
         }
-        Vector<Integer> simbolos = new Vector<Integer>();
         for (Integer i : pixeles) {
 
             if (simbolos.contains(i)) {

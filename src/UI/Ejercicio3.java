@@ -5,20 +5,29 @@
  */
 package UI;
 
-import Clases.Imagen;
+import Clases.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.Vector;
+import javax.imageio.ImageIO;
 
 /**
  *
  * @author francootero
  */
 public class Ejercicio3 extends javax.swing.JFrame {
+    
+    private static Vector<Imagen> imagenes;
 
     /**
      * Creates new form Ejercicio3
      */
-    public Ejercicio3(javax.swing.JFrame parent, boolean modal, Vector<Imagen> datos) {
+    public Ejercicio3(javax.swing.JFrame parent, boolean modal, Vector<Imagen> imagenes) {
+       
         initComponents();
+        this.imagenes = imagenes;
+        
+        // agregar un grafico de LOADING... mientras comprime y un aviso de: La imagen se encuentra en la carpeta generados...
     }
 
     private Ejercicio3() {
@@ -72,10 +81,25 @@ public class Ejercicio3 extends javax.swing.JFrame {
         });
 
         jButton2.setText("Ver Imagen");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Ver Imagen");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Ver Imagen");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("Calcular Tasas");
 
@@ -145,10 +169,82 @@ public class Ejercicio3 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+       
+        Vector<Integer> simbolosOriginal = new Vector<Integer>();
+        int [] cantidadOriginal = new int [imagenes.get(0).getColores()];
+        Vector<SimboloProbabilidad> probabilidadesOriginal = imagenes.get(0).getProbabilidades(simbolosOriginal,cantidadOriginal);
+        ByteEncoding helper = new ByteEncoding();
+        Vector<NodoArbol> arbolOriginal = helper.arbolDeHuffmann(probabilidadesOriginal);
+        Vector<Codificacion> codifOriginal = helper.getSimbolosCodificados(arbolOriginal);
+        helper.encodeSequence(imagenes.get(0).getSecuencia(), codifOriginal, simbolosOriginal, cantidadOriginal, "generados/comprimidoOriginal.txt");
+        helper.decodeSequence("generados/comprimidoOriginal.txt", "generados/descompresionOriginal.bmp");
+        /* 
+        try {
+            BufferedImage image = ImageIO.read(this.getClass().getResource("TpTeoria/generados/descompresionOriginal.bmp"));
+            image.getGraphics();
+            
+            
+        } catch (IOException e) {
+            System.err.println(e.getMessage());}
+      
+        */
+   
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        
+        Vector<Integer> simbolosOriginal = new Vector<Integer>();
+        int [] cantidadOriginal = new int [imagenes.get(0).getColores()];
+        Vector<SimboloProbabilidad> probabilidadesOriginal = imagenes.get(0).getProbabilidades(simbolosOriginal,cantidadOriginal);
+        ByteEncoding helper = new ByteEncoding();
+        Vector<NodoArbol> arbolOriginal = helper.arbolDeHuffmann(probabilidadesOriginal);
+        Vector<Codificacion> codifOriginal = helper.getSimbolosCodificados(arbolOriginal);
+        helper.encodeSequence(imagenes.get(1).getSecuencia(), codifOriginal, simbolosOriginal, cantidadOriginal,"generados/comprimidoMasParecido.txt");
+        helper.decodeSequence("generados/comprimidoMasParecido.txt", "generados/descompresionMasParecido.bmp");
+        /* try {
+            BufferedImage image = ImageIO.read(this.getClass().getResource("TpTeoria/generados/descompresionMasParecido.bmp"));
+            image.getGraphics();
+            
+            
+        } catch (IOException e) {
+            System.err.println(e.getMessage());}
+      
+        */
+            }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Vector<Integer> simbolosOriginal = new Vector<Integer>();
+        int [] cantidadOriginal = new int [imagenes.get(0).getColores()];
+        Vector<SimboloProbabilidad> probabilidadesOriginal = imagenes.get(0).getProbabilidades(simbolosOriginal,cantidadOriginal);
+        ByteEncoding helper = new ByteEncoding();
+        Vector<NodoArbol> arbolOriginal = helper.arbolDeHuffmann(probabilidadesOriginal);
+        Vector<Codificacion> codifOriginal = helper.getSimbolosCodificados(arbolOriginal);
+        helper.encodeSequence(imagenes.get(2).getSecuencia(), codifOriginal, simbolosOriginal,cantidadOriginal,"generados/comprimidoImgPolicia1.txt");
+        helper.decodeSequence("generados/comprimidoImgPolicia1.txt", "generados/descompresionImgPolicia1.bmp");
+         /*try {
+            BufferedImage image = ImageIO.read(this.getClass().getResource("generados/descompresionImgPolicia1.bmp"));
+            image.getGraphics();
+            
+            
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }*/
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        
+        Vector<Integer> simbolosPolicia = new Vector<Integer>();
+        int[] cantidadPolicia = new int [imagenes.get(0).getColores()];
+        ByteEncoding helper = new ByteEncoding();
+        Vector<SimboloProbabilidad> probabilidadesImgPolicia = imagenes.get(2).getProbabilidades(simbolosPolicia, cantidadPolicia);
+        Vector<NodoArbol> arbolImgPolicia = helper.arbolDeHuffmann(probabilidadesImgPolicia);
+        Vector<Codificacion> codifImgPolicia = helper.getSimbolosCodificados(arbolImgPolicia);
+        helper.encodeSequence(imagenes.get(2).getSecuencia(), codifImgPolicia, simbolosPolicia, cantidadPolicia,"generados/comprimidoImgPolicia2.txt");
+        helper.decodeSequence("generados/comprimidoImgPolicia2.txt", "generados/descompresionImgPolicia2.bmp");
+
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    /*
      * @param args the command line arguments
      */
     public static void main(String args[]) {
