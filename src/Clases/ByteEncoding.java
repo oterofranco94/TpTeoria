@@ -85,7 +85,8 @@ public class ByteEncoding {
             for (int i = 0; i < colores; i++) {
 
                 int simbolo = (int) simbolos.get(i);
-                fos.write((char) simbolo);
+               //fos.write((char) simbolo);
+                fos.write(simbolo);
             }
 
             char cod; // indica si el char está completo o sobran bits

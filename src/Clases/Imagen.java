@@ -62,6 +62,8 @@ public class Imagen implements Comparable<Imagen> {
     public Vector<Integer> getSecuencia() {
         return pixeles;
     }
+    
+   
 
     public double[] devolverEnArreglo() {
         double[] aux = new double[pixeles.size()];
@@ -113,13 +115,31 @@ public class Imagen implements Comparable<Imagen> {
         return pixeles.size();
     }
 
-    public Vector<SimboloProbabilidad> getProbabilidades() {
+    public Vector<Integer> getSimbolos() {
         Vector<SimboloProbabilidad> distribucion = new Vector<SimboloProbabilidad>();
         int[] suma = new int[colores];
         for (int i = 0; i < colores; i++) {
             suma[i] = 0;
         }
         Vector<Integer> simbolos = new Vector<Integer>();
+        for (Integer i : pixeles) {
+
+            if (!simbolos.contains(i)) {
+                  simbolos.add(i);
+           
+            if (simbolos.size() == colores)
+                return simbolos;
+            
+        }}
+        return simbolos;
+}
+    
+    public Vector<SimboloProbabilidad> getProbabilidades(Vector<Integer> simbolos, int [] suma){
+                
+        Vector<SimboloProbabilidad> distribucion = new Vector<SimboloProbabilidad>();
+        for (int i = 0; i < colores; i++) {
+            suma[i] = 0;
+        }
         for (Integer i : pixeles) {
 
             if (simbolos.contains(i)) {
@@ -137,9 +157,11 @@ public class Imagen implements Comparable<Imagen> {
         return distribucion;
     }
     
-    public Vector<SimboloProbabilidad> getProbabilidades(Vector<Integer> simbolos, int [] suma){
-                
+    public Vector<SimboloProbabilidad> getProbabilidades(){
+        
+        int suma []  = new int[colores];
         Vector<SimboloProbabilidad> distribucion = new Vector<SimboloProbabilidad>();
+        Vector<Integer>simbolos = new Vector<Integer>();
         for (int i = 0; i < colores; i++) {
             suma[i] = 0;
         }

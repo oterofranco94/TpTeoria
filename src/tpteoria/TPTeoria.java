@@ -31,6 +31,10 @@ public class TPTeoria {
         Imagen will3 = new Imagen("Will 3", "/Imagenes/Will_3.bmp", willOriginal);
         Imagen will4 = new Imagen("Will 4", "/Imagenes/Will_4.bmp", willOriginal);
         Imagen will5 = new Imagen("Will 5", "/Imagenes/Will_5.bmp", willOriginal); 
+        Imagen willCanal2= new Imagen("Will Canal 2", "/Imagenes/Will_Canal2.bmp",null);
+        Imagen willCanal8= new Imagen("Will Canal 8", "/Imagenes/Will_Canal8.bmp",null);
+        Imagen willCanal10 = new Imagen("Will Canal 10", "/Imagenes/Will_Canal10.bmp",null);
+       
         Imagen willEj2 = new Imagen("Will Ej2", "/Imagenes/Will_ej2.bmp", null); 
         Vector<Imagen> imagenes1 = new Vector<Imagen>();
         imagenes1.add(will1);
@@ -50,7 +54,10 @@ public class TPTeoria {
         imagenes3.add(imagenes1.elementAt(0));
         imagenes3.add(willEj2);
         Vector<Imagen> imagenes4 = new Vector<Imagen>();
-        
+        imagenes4.add(willOriginal);
+        imagenes4.add(willCanal2);
+        imagenes4.add(willCanal8);
+        imagenes4.add(willCanal10);
        Menu ui = new Menu(imagenes1, imagenes2, imagenes3, imagenes4);
         ui.setVisible (true);
         
