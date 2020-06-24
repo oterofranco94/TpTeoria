@@ -27,7 +27,7 @@ public class Histograma extends javax.swing.JDialog {
 
     private IntervalXYDataset crearDataset( double [] vector) {
         HistogramDataset dataset = new HistogramDataset();
-        dataset.addSeries("Intensidad", vector, 16);
+        dataset.addSeries("Apariciones", vector, 16);
       
         return dataset;
 }

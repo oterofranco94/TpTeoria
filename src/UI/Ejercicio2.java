@@ -43,14 +43,14 @@ public class Ejercicio2 extends javax.swing.JFrame {
         
         
         txt0.setText(datos.elementAt(0).name);
-        txt1.setText(String.valueOf(datos.elementAt(0).getMedia()));
-        txt2.setText(String.valueOf(datos.elementAt(0).getDesvioEstandar()));
+        txt1.setText(String.valueOf(String.format("%.3f",datos.elementAt(0).getMedia())));
+        txt2.setText(String.valueOf(String.format("%.3f",datos.elementAt(0).getDesvioEstandar())));
         txt3.setText(datos.elementAt(1).name);
-        txt4.setText(String.valueOf(datos.elementAt(1).getMedia()));
-        txt5.setText(String.valueOf(datos.elementAt(1).getDesvioEstandar()));
+        txt4.setText(String.valueOf(String.format("%.3f",datos.elementAt(1).getMedia())));
+        txt5.setText(String.valueOf(String.format( "%.3f", datos.elementAt(1).getDesvioEstandar())));
         txt6.setText(datos.elementAt(2).name);
-        txt7.setText(String.valueOf(datos.elementAt(2).getMedia()));
-        txt8.setText(String.valueOf(datos.elementAt(2).getDesvioEstandar()));
+        txt7.setText(String.valueOf(String.format("%.3f", datos.elementAt(2).getMedia())));
+        txt8.setText(String.valueOf(String.format("%.3f", datos.elementAt(2).getDesvioEstandar())));
         
     }
 

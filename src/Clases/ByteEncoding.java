@@ -80,14 +80,14 @@ public class ByteEncoding {
                 }
                 secuenciaCodificada = secuenciaCodificada + buffer;
             }
-
+            int simbolo;
             FileOutputStream fos = new FileOutputStream(new File(outputfilepath));
             for (int i = 0; i < colores; i++) {
 
-                int simbolo = (int) simbolos.get(i);
-               //fos.write((char) simbolo);
-                fos.write(simbolo);
-            }
+                simbolo = (int) simbolos.get(i);
+                fos.write((char) simbolo);
+               
+               }
 
             char cod; // indica si el char está completo o sobran bits
             int cantidadocupada; //cantidad de chars que ocupa cantidades[i]
@@ -168,14 +168,15 @@ public class ByteEncoding {
 
             int alto = (int) fis.read() * 255;
             alto += (int) fis.read();
+            
 
             int cantidadPixeles = ancho * alto;
 
-            Vector<SimboloProbabilidad> probabilidades = getProbabilidades(simbolos, cantidades, cantidadPixeles);
+            Vector<SimboloProbabilidad> probabilidades = armarProbabilidades(simbolos, cantidades, cantidadPixeles);
 
-            Vector<NodoArbol> arbolHuffmann = arbolDeHuffmann(probabilidades);
+            Vector<NodoArbol> arbolHuffman = arbolDeHuffman(probabilidades);
 
-            Vector<Codificacion> codificacion = getSimbolosCodificados(arbolHuffmann);
+            Vector<Codificacion> codificacion = getSimbolosCodificados(arbolHuffman);
 
             Vector<Integer> secuenciaRestaurada = new Vector<Integer>();
 
@@ -286,7 +287,7 @@ public class ByteEncoding {
         }
     }
 
-    public static Vector<SimboloProbabilidad> getProbabilidades(Vector<Integer> simbolos, Vector<Integer> cantidades, int cantidadPixeles) {
+    public static Vector<SimboloProbabilidad> armarProbabilidades(Vector<Integer> simbolos, Vector<Integer> cantidades, int cantidadPixeles) {
 
         Vector<SimboloProbabilidad> probabilidades = new Vector<SimboloProbabilidad>();
         for (int i = 0; i < colores; i++) {
@@ -297,7 +298,7 @@ public class ByteEncoding {
         return probabilidades;
     }
 
-    public Vector<NodoArbol> arbolDeHuffmann(Vector<SimboloProbabilidad> probabilidades) {
+    public Vector<NodoArbol> arbolDeHuffman(Vector<SimboloProbabilidad> probabilidades) {
         Collections.sort(probabilidades);
         Vector<NodoArbol> arbolHuffmann = new Vector<NodoArbol>();
         NodoArbol nodo1 = new NodoArbol(null, null, probabilidades.get(0));

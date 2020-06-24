@@ -16,6 +16,13 @@ import java.util.Vector;
 public class Ejercicio4 extends javax.swing.JFrame {
     
         private Vector<Imagen> imagenes;
+        private Matriz matriz1;
+        private Matriz matriz2;
+        private Matriz matriz3;
+        double ruidoCanal1;
+        double ruidoCanal2;
+        double ruidoCanal3;
+              
   
 
     /**
@@ -26,8 +33,29 @@ public class Ejercicio4 extends javax.swing.JFrame {
         
         this.imagenes = imagenes;
         
+        Canal c2 = new Canal (imagenes.get(0).getSecuencia(),imagenes.get(2).getSecuencia(),imagenes.get(0).getSimbolos());
+        double[] []  conjunta2 = c2.getMatrizConjunta();
+        double [] [] transicion2 = c2.getMatrizdeTransicion(conjunta2, imagenes.get(0).getProbabilidades());
+        matriz2 = new Matriz (transicion2,imagenes.get(0).getSimbolos());
+        ruidoCanal2 = c2.ruidoPorMuestreo(transicion2, imagenes.get(0).getProbabilidades());
+               
         
-     
+        Canal c1 = new Canal (imagenes.get(0).getSecuencia(),imagenes.get(1).getSecuencia(),imagenes.get(0).getSimbolos());
+        double[] []  conjunta1 = c1.getMatrizConjunta();
+        double [] [] transicion1 = c1.getMatrizdeTransicion(conjunta1, imagenes.get(0).getProbabilidades());
+        matriz1 = new Matriz (transicion2,imagenes.get(0).getSimbolos());
+        ruidoCanal1 = c1.ruidoPorMuestreo(transicion1, imagenes.get(0).getProbabilidades());
+        
+        
+        
+        Canal c3 = new Canal (imagenes.get(0).getSecuencia(),imagenes.get(3).getSecuencia(),imagenes.get(0).getSimbolos());
+        double[] []  conjunta3 = c3.getMatrizConjunta();
+        double [] [] transicion3 = c3.getMatrizdeTransicion(conjunta3, imagenes.get(0).getProbabilidades());
+        matriz3 = new Matriz (transicion3,imagenes.get(0).getSimbolos());
+        ruidoCanal3 = c3.ruidoPorMuestreo(transicion3, imagenes.get(0).getProbabilidades());
+        
+         
+        
         
         
     }
@@ -135,9 +163,9 @@ public class Ejercicio4 extends javax.swing.JFrame {
                                     .addComponent(jButton2))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(12, 12, 12)
-                                        .addComponent(jLabel5)
                                         .addGap(18, 18, 18)
+                                        .addComponent(jLabel5)
+                                        .addGap(12, 12, 12)
                                         .addComponent(txtRuidoCanal2))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(18, 18, 18)
@@ -214,45 +242,31 @@ public class Ejercicio4 extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         
-        Canal c3 = new Canal (imagenes.get(0).getSecuencia(),imagenes.get(3).getSecuencia(),imagenes.get(0).getSimbolos());
-        double[] []  conjunta3 = c3.getMatrizConjunta();
-        double [] [] transicion3 = c3.getMatrizdeTransicion(conjunta3, imagenes.get(0).getProbabilidades());
-       Matriz matriz3 = new Matriz (transicion3,imagenes.get(0).getSimbolos());
         matriz3.setVisible(true);
         matriz3.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         matriz3.setLocationRelativeTo(this);
         matriz3.toFront();
-        double ruidoCanal3 = c3.ruidoPorMuestreo(transicion3, imagenes.get(0).getProbabilidades());
-        this.txtRuidoCanal10.setText(String.valueOf(ruidoCanal3));
+        
+        this.txtRuidoCanal10.setText(String.valueOf(String.format("%.3f", ruidoCanal3)));
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        Canal c1 = new Canal (imagenes.get(0).getSecuencia(),imagenes.get(1).getSecuencia(),imagenes.get(0).getSimbolos());
-        double[] []  conjunta1 = c1.getMatrizConjunta();
-        double [] [] transicion1 = c1.getMatrizdeTransicion(conjunta1, imagenes.get(0).getProbabilidades());
-        Matriz matriz1 = new Matriz (transicion1,imagenes.get(0).getSimbolos());
         matriz1.setVisible(true);
         matriz1.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         matriz1.setLocationRelativeTo(this);
         matriz1.toFront(); 
-        double ruidoCanal1 = c1.ruidoPorMuestreo(transicion1, imagenes.get(0).getProbabilidades());
-        this.txtRuidoCanal2.setText(String.valueOf(ruidoCanal1));
+        this.txtRuidoCanal2.setText(String.valueOf(String.format("%.3f", ruidoCanal1)));
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
-        Canal c2 = new Canal (imagenes.get(0).getSecuencia(),imagenes.get(2).getSecuencia(),imagenes.get(0).getSimbolos());
-        double[] []  conjunta2 = c2.getMatrizConjunta();
-        double [] [] transicion2 = c2.getMatrizdeTransicion(conjunta2, imagenes.get(0).getProbabilidades());
-        Matriz matriz1 = new Matriz (transicion2,imagenes.get(0).getSimbolos());
         matriz1.setVisible(true);
         matriz1.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         matriz1.setLocationRelativeTo(this);
         matriz1.toFront();
-        double ruidoCanal2 = c2.ruidoPorMuestreo(transicion2, imagenes.get(0).getProbabilidades());
-        this.txtRuidoCanal8.setText(String.valueOf(ruidoCanal2));
+        this.txtRuidoCanal8.setText(String.valueOf(String.format("%.3f", ruidoCanal2)));
         
     }//GEN-LAST:event_jButton2ActionPerformed
 

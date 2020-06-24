@@ -5,6 +5,7 @@
  */
 package Clases;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 /**
@@ -17,8 +18,8 @@ public class Canal {
     private Vector<Integer> salida;
     private Vector<Integer> simbolos;
     private static int colores = 16;
-    private static float EPSILON = 0.0001f;
-    private static int NUM_MIN_MUESTRAS = 10000;
+    private static double EPSILON = 0.00001d;
+    private static int NUM_MIN_MUESTRAS = 5000;
 
     public Canal(Vector<Integer> entrada, Vector<Integer> salida, Vector<Integer> simbolos) {
         this.entrada = entrada;
@@ -34,7 +35,7 @@ public class Canal {
         Integer y;
         int columna;
         int fila;
-        for (int i = 0; i < entrada.size(); i++) {
+        for (int i = 0; i < (int)entrada.size(); i++) {
             x = entrada.get(i);
             y = salida.get(i);
             columna = simbolos.indexOf(x);
@@ -95,10 +96,8 @@ public class Canal {
 
     private boolean converge(double probAnt, double probAct) {
         
-         if (Math.abs(probAnt - probAct) < EPSILON) {
-                    return true;
-                }
-                return false;
+         return (Math.abs(probAnt - probAct) < EPSILON) ;
+                    
             
         
     }
@@ -107,8 +106,8 @@ public class Canal {
         double ruido = 0;
         for(int i= 0;i<colores;i++){
             for(int j=0;j<colores;j++){
-                if (matrizConjunta[i][j] != 0)
-                    ruido -= matrizConjunta [i][j] * (Math.log10(matrizConjunta [i][j]) / Math.log10(2) );
+                if (matrizConjunta[i][j] != 0.0)
+                    ruido += Math.abs( matrizConjunta [i][j] * (Math.log10(matrizConjunta [i][j]) / Math.log10(2) ));
             }
         }
         return (ruido);
@@ -117,7 +116,6 @@ public class Canal {
     
     public double ruidoPorMuestreo(double[][] mTransicion, Vector<SimboloProbabilidad> probabilidadesX) {
 
-        float error = 0.1f;
 
         int muestras = 0;
 
@@ -127,9 +125,11 @@ public class Canal {
 
         double ruidoAct = 0;
         
-        double ruidoAnt = 0;
+        double ruidoAnt = -1;
         
         double[][] probConjunta = new double[colores][colores];
+        
+        int[][] apariciones = new int [colores][colores];
 
         // Calculo probabilidad acumulada
         for (int i = 0; i < colores; i++) {
@@ -137,6 +137,8 @@ public class Canal {
             for (int j = 0; j < colores; j++) {
                 parcial += mTransicion[j][i];
                 mAcum[j][i] = parcial;
+                probConjunta [i] [j] = 0;
+                apariciones [i][j] = 0;
             }
         }
 
@@ -144,23 +146,30 @@ public class Canal {
         Integer y;
         int fila;
         int columna;
+        double [] error = new double [100];
+        int index = 0;
+        
+        
+        //Vector<Integer> errorList = new Vector<Integer>;
+                
         while (!converge(ruidoAct, ruidoAnt) || muestras < NUM_MIN_MUESTRAS) {
-
+           
             x = generarXRandom(probabilidadX);
             y = generarYdadoX(mAcum, simbolos.indexOf(x));
             columna = simbolos.indexOf(x);
             fila = simbolos.indexOf(y);
-            probConjunta [fila][columna] += 1.0;
+            apariciones [fila][columna] ++;
             muestras++;
             
             for (int i=0;i<colores;i++){
                 for (int j=0;j<colores;j++){
-                    probConjunta [i][j] = probConjunta [i] [j] / muestras;
+                    probConjunta [i][j] = (double)apariciones [i] [j] / muestras;
                 }
             }
             ruidoAnt = ruidoAct; 
             ruidoAct = calcularRuido (probConjunta);
         }
+        
         
         return ruidoAct;
         

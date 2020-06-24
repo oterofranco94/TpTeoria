@@ -20,13 +20,41 @@ import javax.swing.JOptionPane;
 public class Ejercicio3 extends javax.swing.JFrame {
     
     private static Vector<Imagen> imagenes;
+    Vector< Integer> simbolosOriginal;
+    private int [] cantOriginal ;
+    private Vector<SimboloProbabilidad> probabilidadesOriginal;
+    private Vector<NodoArbol> arbolOriginal;
+    private Vector<Codificacion> codifOriginal;
+    private ByteEncoding helper;
+    private Vector<Integer> simbolosPolicia;
+    private int [] cantPolicia;
+    private Vector<SimboloProbabilidad> probabilidadesImgPolicia;
+    private Vector<NodoArbol> arbolImgPolicia;
+    private Vector<Codificacion> codifImgPolicia;
 
     /**
      * Creates new form Ejercicio3
      */
     public Ejercicio3(javax.swing.JFrame parent, boolean modal, Vector<Imagen> imagenes) {
+       
+   
         initComponents();
+        helper = new ByteEncoding();
         this.imagenes = imagenes;
+        simbolosOriginal = imagenes.get(0).getSimbolos();
+        cantOriginal = new int [imagenes.get(0).getColores()];
+        probabilidadesOriginal = imagenes.get(0).getProbabilidades(simbolosOriginal, cantOriginal);
+        arbolOriginal = helper.arbolDeHuffman(probabilidadesOriginal);
+        codifOriginal = helper.getSimbolosCodificados(arbolOriginal);
+        
+        simbolosPolicia = new Vector<Integer>();
+        int[] cantidadPolicia = new int [imagenes.get(0).getColores()];
+        ByteEncoding helper = new ByteEncoding();
+        probabilidadesImgPolicia = imagenes.get(2).getProbabilidades(simbolosPolicia, cantidadPolicia);
+        arbolImgPolicia = helper.arbolDeHuffman(probabilidadesImgPolicia);
+        codifImgPolicia = helper.getSimbolosCodificados(arbolImgPolicia);
+        
+                
         
     }
 
@@ -174,15 +202,10 @@ public class Ejercicio3 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        //JOptionPane.showMessageDialog(null, "Cargando...puede demorar varios minutos. Los archivos apareceran en la carpeta 'generados'.");
-        Vector<Integer> simbolosOriginal = new Vector<Integer>();
-        int [] cantidadOriginal = new int [imagenes.get(0).getColores()];
-        Vector<SimboloProbabilidad> probabilidadesOriginal = imagenes.get(0).getProbabilidades(simbolosOriginal,cantidadOriginal);
-        ByteEncoding helper = new ByteEncoding();
-        Vector<NodoArbol> arbolOriginal = helper.arbolDeHuffmann(probabilidadesOriginal);
-        Vector<Codificacion> codifOriginal = helper.getSimbolosCodificados(arbolOriginal);
-        helper.encodeSequence(imagenes.get(0).getSecuencia(), codifOriginal, simbolosOriginal, cantidadOriginal, "generados/comprimidoOriginal.txt");
+       
+       JOptionPane.showMessageDialog(null, "Cargando...puede demorar varios minutos. Los archivos apareceran en la carpeta 'generados'.");
+        
+        helper.encodeSequence(imagenes.get(0).getSecuencia(), codifOriginal, simbolosOriginal, cantOriginal, "generados/comprimidoOriginal.txt");
         helper.decodeSequence("generados/comprimidoOriginal.txt", "generados/descompresionOriginal.bmp");
         /* 
         try {
@@ -198,57 +221,27 @@ public class Ejercicio3 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       
         JOptionPane.showMessageDialog(null, "Cargando...puede demorar varios minutos. Los archivos apareceran en la carpeta 'generados'.");
-        Vector<Integer> simbolosOriginal = new Vector<Integer>();
-        int [] cantidadOriginal = new int [imagenes.get(0).getColores()];
-        Vector<SimboloProbabilidad> probabilidadesOriginal = imagenes.get(0).getProbabilidades(simbolosOriginal,cantidadOriginal);
-        ByteEncoding helper = new ByteEncoding();
-        Vector<NodoArbol> arbolOriginal = helper.arbolDeHuffmann(probabilidadesOriginal);
-        Vector<Codificacion> codifOriginal = helper.getSimbolosCodificados(arbolOriginal);
-        helper.encodeSequence(imagenes.get(1).getSecuencia(), codifOriginal, simbolosOriginal, cantidadOriginal,"generados/comprimidoMasParecido.txt");
+  
+        helper.encodeSequence(imagenes.get(1).getSecuencia(), codifOriginal, simbolosOriginal, cantOriginal,"generados/comprimidoMasParecido.txt");
         helper.decodeSequence("generados/comprimidoMasParecido.txt", "generados/descompresionMasParecido.bmp");
-        /* try {
-            BufferedImage image = ImageIO.read(this.getClass().getResource("TpTeoria/generados/descompresionMasParecido.bmp"));
-            image.getGraphics();
-            
-            
-        } catch (IOException e) {
-            System.err.println(e.getMessage());}
-      
-        */
+        
             }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        JOptionPane.showMessageDialog(null, "Cargando...puede demorar varios minutos. Los archivos apareceran en la carpeta 'generados'.");
-        Vector<Integer> simbolosOriginal = new Vector<Integer>();
-        int [] cantidadOriginal = new int [imagenes.get(0).getColores()];
-        Vector<SimboloProbabilidad> probabilidadesOriginal = imagenes.get(0).getProbabilidades(simbolosOriginal,cantidadOriginal);
-        ByteEncoding helper = new ByteEncoding();
-        Vector<NodoArbol> arbolOriginal = helper.arbolDeHuffmann(probabilidadesOriginal);
-        Vector<Codificacion> codifOriginal = helper.getSimbolosCodificados(arbolOriginal);
-        helper.encodeSequence(imagenes.get(2).getSecuencia(), codifOriginal, simbolosOriginal,cantidadOriginal,"generados/comprimidoImgPolicia1.txt");
+         JOptionPane.showMessageDialog(null, "Cargando...puede demorar varios minutos. Los archivos apareceran en la carpeta 'generados'.");
+
+        helper.encodeSequence(imagenes.get(2).getSecuencia(), codifOriginal, simbolosOriginal,cantOriginal,"generados/comprimidoImgPolicia1.txt");
         helper.decodeSequence("generados/comprimidoImgPolicia1.txt", "generados/descompresionImgPolicia1.bmp");
-         /*try {
-            BufferedImage image = ImageIO.read(this.getClass().getResource("generados/descompresionImgPolicia1.bmp"));
-            image.getGraphics();
-            
-            
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
-        }*/
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-
+        
         JOptionPane.showMessageDialog(null, "Cargando...puede demorar varios minutos. Los archivos apareceran en la carpeta 'generados'.");
-        Vector<Integer> simbolosPolicia = new Vector<Integer>();
-        int[] cantidadPolicia = new int [imagenes.get(0).getColores()];
-        ByteEncoding helper = new ByteEncoding();
-        Vector<SimboloProbabilidad> probabilidadesImgPolicia = imagenes.get(2).getProbabilidades(simbolosPolicia, cantidadPolicia);
-        Vector<NodoArbol> arbolImgPolicia = helper.arbolDeHuffmann(probabilidadesImgPolicia);
-        Vector<Codificacion> codifImgPolicia = helper.getSimbolosCodificados(arbolImgPolicia);
-        helper.encodeSequence(imagenes.get(2).getSecuencia(), codifImgPolicia, simbolosPolicia, cantidadPolicia,"generados/comprimidoImgPolicia2.txt");
+
+        helper.encodeSequence(imagenes.get(2).getSecuencia(), codifImgPolicia, simbolosPolicia, cantPolicia,"generados/comprimidoImgPolicia2.txt");
         helper.decodeSequence("generados/comprimidoImgPolicia2.txt", "generados/descompresionImgPolicia2.bmp");
 
     }//GEN-LAST:event_jButton5ActionPerformed

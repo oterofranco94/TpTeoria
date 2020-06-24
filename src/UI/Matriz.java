@@ -32,8 +32,10 @@ public class Matriz extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(simbolos.size()+1);
         model.setColumnCount(simbolos.size()+1);
+        model.setValueAt("P(Y/X)", 0, 0);
         for (int i = 0;i<simbolos.size();i++){
             model.setValueAt(simbolos.get(i), 0, i+1);
+            
             model.setValueAt(simbolos.get(i),i+1, 0);
         }
         for(int i = 1; i<=simbolos.size();i++){
