@@ -1,6 +1,10 @@
 package UI;
 
 import Clases.Imagen;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.text.DecimalFormat;
 import java.util.Vector;
 import javax.swing.JDialog;
 
@@ -16,7 +20,10 @@ public class Ejercicio1 extends javax.swing.JDialog {
         txt2.setText(datos.elementAt(1).name + " con Factor de Correlacion: " + datos.elementAt(1).correlacionConOriginal);
         txt3.setText(datos.elementAt(2).name + " con Factor de Correlacion: " + datos.elementAt(2).correlacionConOriginal);
         txt4.setText(datos.elementAt(3).name + " con Factor de Correlacion: " + datos.elementAt(3).correlacionConOriginal);
-        txt5.setText(datos.elementAt(4).name + " con Factor de Correlacion: " + datos.elementAt(4).correlacionConOriginal);     
+        txt5.setText(datos.elementAt(4).name + " con Factor de Correlacion: " + datos.elementAt(4).correlacionConOriginal); 
+        //String archivo = "../TpTeoInfo/generados/descompresionOriginal.bmp";
+        //File longitud = new File(archivo);
+        //System.out.println(longitud.length());
     }
 
     private Ejercicio1(JDialog jDialog, boolean b) {

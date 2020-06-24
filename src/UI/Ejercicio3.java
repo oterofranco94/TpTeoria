@@ -10,6 +10,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Vector;
 import javax.imageio.ImageIO;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,11 +25,9 @@ public class Ejercicio3 extends javax.swing.JFrame {
      * Creates new form Ejercicio3
      */
     public Ejercicio3(javax.swing.JFrame parent, boolean modal, Vector<Imagen> imagenes) {
-       
         initComponents();
         this.imagenes = imagenes;
         
-        // agregar un grafico de LOADING... mientras comprime y un aviso de: La imagen se encuentra en la carpeta generados...
     }
 
     private Ejercicio3() {
@@ -73,28 +73,28 @@ public class Ejercicio3 extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Euphemia UCAS", 0, 18)); // NOI18N
         jLabel6.setText("Compresión de Imagenes:");
 
-        jButton1.setText("Ver Imagen");
+        jButton1.setText("Ejecutar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Ver Imagen");
+        jButton2.setText("Ejecutar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Ver Imagen");
+        jButton3.setText("Ejecutar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Ver Imagen");
+        jButton5.setText("Ejecutar");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -102,6 +102,11 @@ public class Ejercicio3 extends javax.swing.JFrame {
         });
 
         jButton6.setText("Calcular Tasas");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -169,7 +174,8 @@ public class Ejercicio3 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
+
+        //JOptionPane.showMessageDialog(null, "Cargando...puede demorar varios minutos. Los archivos apareceran en la carpeta 'generados'.");
         Vector<Integer> simbolosOriginal = new Vector<Integer>();
         int [] cantidadOriginal = new int [imagenes.get(0).getColores()];
         Vector<SimboloProbabilidad> probabilidadesOriginal = imagenes.get(0).getProbabilidades(simbolosOriginal,cantidadOriginal);
@@ -192,7 +198,7 @@ public class Ejercicio3 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        
+        JOptionPane.showMessageDialog(null, "Cargando...puede demorar varios minutos. Los archivos apareceran en la carpeta 'generados'.");
         Vector<Integer> simbolosOriginal = new Vector<Integer>();
         int [] cantidadOriginal = new int [imagenes.get(0).getColores()];
         Vector<SimboloProbabilidad> probabilidadesOriginal = imagenes.get(0).getProbabilidades(simbolosOriginal,cantidadOriginal);
@@ -213,6 +219,8 @@ public class Ejercicio3 extends javax.swing.JFrame {
             }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        JOptionPane.showMessageDialog(null, "Cargando...puede demorar varios minutos. Los archivos apareceran en la carpeta 'generados'.");
         Vector<Integer> simbolosOriginal = new Vector<Integer>();
         int [] cantidadOriginal = new int [imagenes.get(0).getColores()];
         Vector<SimboloProbabilidad> probabilidadesOriginal = imagenes.get(0).getProbabilidades(simbolosOriginal,cantidadOriginal);
@@ -232,7 +240,8 @@ public class Ejercicio3 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        
+
+        JOptionPane.showMessageDialog(null, "Cargando...puede demorar varios minutos. Los archivos apareceran en la carpeta 'generados'.");
         Vector<Integer> simbolosPolicia = new Vector<Integer>();
         int[] cantidadPolicia = new int [imagenes.get(0).getColores()];
         ByteEncoding helper = new ByteEncoding();
@@ -243,6 +252,10 @@ public class Ejercicio3 extends javax.swing.JFrame {
         helper.decodeSequence("generados/comprimidoImgPolicia2.txt", "generados/descompresionImgPolicia2.bmp");
 
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /*
      * @param args the command line arguments
