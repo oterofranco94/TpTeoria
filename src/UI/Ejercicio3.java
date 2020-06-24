@@ -7,6 +7,7 @@ package UI;
 
 import Clases.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.Vector;
 import javax.imageio.ImageIO;
@@ -207,17 +208,6 @@ public class Ejercicio3 extends javax.swing.JFrame {
         
         helper.encodeSequence(imagenes.get(0).getSecuencia(), codifOriginal, simbolosOriginal, cantOriginal, "generados/comprimidoOriginal.txt");
         helper.decodeSequence("generados/comprimidoOriginal.txt", "generados/descompresionOriginal.bmp");
-        /* 
-        try {
-            BufferedImage image = ImageIO.read(this.getClass().getResource("TpTeoria/generados/descompresionOriginal.bmp"));
-            image.getGraphics();
-            
-            
-        } catch (IOException e) {
-            System.err.println(e.getMessage());}
-      
-        */
-   
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -247,7 +237,46 @@ public class Ejercicio3 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        
+
+    Vector<Double> lista = new Vector<Double>();
+    
+    String archivo1 = "../TpTeoInfo/src/Imagenes/Will(Original).bmp";
+    long longitud1 = new File(archivo1).length();
+    lista.add(Double.valueOf(longitud1));
+    
+    String archivo2 = "../TpTeoInfo/generados/descompresionOriginal.bmp";
+    long longitud2 = new File(archivo2).length();
+    lista.add(Double.valueOf(longitud2));
+    
+    String archivo3 = "../TpTeoInfo/src/Imagenes/Will_1.bmp";
+    long longitud3 = new File(archivo3).length();
+    lista.add(Double.valueOf(longitud3));
+    
+    String archivo4 = "../TpTeoInfo/generados/descompresionMasParecido.bmp";
+    long longitud4 = new File(archivo4).length();
+    lista.add(Double.valueOf(longitud4));
+    
+    String archivo5 = "../TpTeoInfo/src/Imagenes/Will_ej2.bmp";
+    long longitud5 = new File(archivo5).length();
+    lista.add(Double.valueOf(longitud5));
+    
+    String archivo6 = "../TpTeoInfo/generados/descompresionImgPolicia1.bmp";
+    long longitud6 = new File(archivo6).length();
+    lista.add(Double.valueOf(longitud6));
+    
+    String archivo7 = "../TpTeoInfo/generados/descompresionImgPolicia2.bmp";
+    long longitud7 = new File(archivo7).length();
+    lista.add(Double.valueOf(longitud7));
+    
+    Vector<Double> resultado = new Vector<Double>();
+    resultado.add(lista.elementAt(0)/lista.elementAt(1));
+    resultado.add(lista.elementAt(2)/lista.elementAt(3));
+    resultado.add(lista.elementAt(4)/lista.elementAt(5));
+    resultado.add(lista.elementAt(4)/lista.elementAt(6));
+
+    
+    Tasas t = new Tasas(this, true, resultado);
+    t.setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     /*

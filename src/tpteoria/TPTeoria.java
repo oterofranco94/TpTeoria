@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Vector;
 import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageInputStream;
+import javax.swing.UIManager;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -25,6 +26,7 @@ import org.jfree.chart.plot.PlotOrientation;
 
 public class TPTeoria {
     public static void main(String[] args) throws FileNotFoundException, IOException {
+        UIManager.put("OptionPane.okButtonText", "Continuar");
        Imagen willOriginal = new Imagen("Will Original", "/Imagenes/Will(Original).bmp", null);
         Imagen will1 = new Imagen("Will 1", "/Imagenes/Will_1.bmp", willOriginal);
         Imagen will2 = new Imagen("Will 2", "/Imagenes/Will_2.bmp", willOriginal);

@@ -1,29 +1,28 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package UI;
 
-import Clases.Imagen;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.text.DecimalFormat;
 import java.util.Vector;
-import javax.swing.JDialog;
 
-public class Ejercicio1 extends javax.swing.JDialog {
+/**
+ *
+ * @author francootero
+ */
+public class Tasas extends javax.swing.JDialog {
 
     /**
-     * Creates new form Ejercicio1
+     * Creates new form Tasas
      */
-    public Ejercicio1(javax.swing.JDialog parent, boolean modal, Vector<Imagen> datos) {
+    public Tasas(java.awt.Frame parent, boolean modal, Vector<Double> resultados) {
         super(parent, modal);
         initComponents();
-        txt1.setText(datos.elementAt(0).name + " con Factor de Correlacion: " + datos.elementAt(0).correlacionConOriginal);
-        txt2.setText(datos.elementAt(1).name + " con Factor de Correlacion: " + datos.elementAt(1).correlacionConOriginal);
-        txt3.setText(datos.elementAt(2).name + " con Factor de Correlacion: " + datos.elementAt(2).correlacionConOriginal);
-        txt4.setText(datos.elementAt(3).name + " con Factor de Correlacion: " + datos.elementAt(3).correlacionConOriginal);
-        txt5.setText(datos.elementAt(4).name + " con Factor de Correlacion: " + datos.elementAt(4).correlacionConOriginal); 
-    }
-
-    private Ejercicio1(JDialog jDialog, boolean b) {
+        this.txt1.setText(String.valueOf(resultados.elementAt(0)));
+        this.txt2.setText(String.valueOf(resultados.elementAt(1)));
+        this.txt3.setText(String.valueOf(resultados.elementAt(2)));
+        this.txt4.setText(String.valueOf(resultados.elementAt(3)));
     }
 
     /**
@@ -41,75 +40,49 @@ public class Ejercicio1 extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         txt1 = new javax.swing.JLabel();
         txt2 = new javax.swing.JLabel();
         txt3 = new javax.swing.JLabel();
         txt4 = new javax.swing.JLabel();
-        txt5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
-        jLabel1.setFont(new java.awt.Font("Euphemia UCAS", 0, 18)); // NOI18N
-        jLabel1.setText("Lista ordenada bajo factor de correlacion:");
+        jLabel1.setText("Tasas de Compresion:");
 
-        jLabel2.setText("1:");
+        jLabel2.setText("Ejercicio A:");
 
-        jLabel3.setText("2:");
+        jLabel3.setText("Ejercicio B:");
 
-        jLabel4.setText("3:");
+        jLabel4.setText("Ejercicio C:");
 
-        jLabel5.setText("4:");
-
-        jLabel6.setText("5:");
-
-        txt1.setForeground(new java.awt.Color(102, 102, 102));
-
-        txt2.setForeground(new java.awt.Color(102, 102, 102));
-
-        txt3.setForeground(new java.awt.Color(102, 102, 102));
-
-        txt4.setForeground(new java.awt.Color(102, 102, 102));
-
-        txt5.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel5.setText("Ejercicio D:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addGap(43, 43, 43)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt1)
                     .addComponent(jLabel1)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(txt2))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(txt1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(txt3))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(txt4))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(txt5)))
-                .addContainerGap(169, Short.MAX_VALUE))
+                    .addComponent(txt2)
+                    .addComponent(txt3)
+                    .addComponent(txt4))
+                .addContainerGap(155, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(15, 15, 15)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -127,22 +100,18 @@ public class Ejercicio1 extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txt4))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txt5))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -166,20 +135,20 @@ public class Ejercicio1 extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Ejercicio1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Tasas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Ejercicio1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Tasas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Ejercicio1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Tasas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Ejercicio1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Tasas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Ejercicio1 dialog = new Ejercicio1(new javax.swing.JDialog(), true);
+                Tasas dialog = new Tasas(new javax.swing.JFrame(), true, new Vector<Double>() );
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -197,12 +166,10 @@ public class Ejercicio1 extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel txt1;
     private javax.swing.JLabel txt2;
     private javax.swing.JLabel txt3;
     private javax.swing.JLabel txt4;
-    private javax.swing.JLabel txt5;
     // End of variables declaration//GEN-END:variables
 }
