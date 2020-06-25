@@ -41,7 +41,7 @@ public class ByteEncoding {
         return "";
     }
 
-    public void encodeSequence( Vector<Integer> secuencia, Vector<Codificacion> codificacion, Vector<Integer> simbolos, int[] cantidades, String outputfilepath) {
+    public void encodeSequence(Vector<Integer> secuencia, Vector<Codificacion> codificacion, Vector<Integer> simbolos, int[] cantidades, String outputfilepath) {
         try {
 
             String secuenciaCodificada = "";
@@ -86,8 +86,8 @@ public class ByteEncoding {
 
                 simbolo = (int) simbolos.get(i);
                 fos.write((char) simbolo);
-               
-               }
+
+            }
 
             char cod; // indica si el char está completo o sobran bits
             int cantidadocupada; //cantidad de chars que ocupa cantidades[i]
@@ -104,6 +104,7 @@ public class ByteEncoding {
                     fos.write((char) cantidadchars);
                     fos.write((char) cantidadocupada - cantidadchars * 255);
                     fos.write((char) resto);
+              
                 } else {
                     cod = 's';
                     fos.write(cod);
@@ -125,7 +126,6 @@ public class ByteEncoding {
             }
 
             fos.close();
-            
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -168,7 +168,6 @@ public class ByteEncoding {
 
             int alto = (int) fis.read() * 255;
             alto += (int) fis.read();
-            
 
             int cantidadPixeles = ancho * alto;
 
@@ -179,7 +178,6 @@ public class ByteEncoding {
             Vector<Codificacion> codificacion = getSimbolosCodificados(arbolHuffman);
 
             Vector<Integer> secuenciaRestaurada = new Vector<Integer>();
-
 
             int bufferPos = 0;
             //   int i = 0;
@@ -253,34 +251,33 @@ public class ByteEncoding {
 
             }
 
-            BufferedImage bufferedImage = new BufferedImage(ancho, alto,BufferedImage.TYPE_BYTE_INDEXED); //BufferedImage.TYPE_INT_RGB);
+            BufferedImage bufferedImage = new BufferedImage(ancho, alto, BufferedImage.TYPE_BYTE_INDEXED); //BufferedImage.TYPE_INT_RGB);
             Graphics2D g2 = bufferedImage.createGraphics();
             //g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-           
+
             g2.fillRect(0, 0, ancho, alto);
 
             int nodo = 0;
             int r = 0;
             //int g = 0;
             //int b = 0;
-            
+
             for (int i = 0; i < ancho; i++) {
                 for (int j = 0; j < alto; j++) {
 
-                    r = (int)secuenciaRestaurada.elementAt(nodo);
+                    r = (int) secuenciaRestaurada.elementAt(nodo);
                     nodo++;
-                    
+
                     Color color = new Color(r, r, r);
-                    
+
                     bufferedImage.setRGB(i, j, color.getRGB());
-                   
+
                 }
             }
 
             g2.dispose();
 
             ImageIO.write(bufferedImage, "bmp", new File(newFilepath));
-
 
         } catch (IOException e1) {
             e1.printStackTrace();
@@ -299,6 +296,7 @@ public class ByteEncoding {
     }
 
     public Vector<NodoArbol> arbolDeHuffman(Vector<SimboloProbabilidad> probabilidades) {
+
         Collections.sort(probabilidades);
         Vector<NodoArbol> arbolHuffmann = new Vector<NodoArbol>();
         NodoArbol nodo1 = new NodoArbol(null, null, probabilidades.get(0));

@@ -35,7 +35,7 @@ public class Canal {
         Integer y;
         int columna;
         int fila;
-        for (int i = 0; i < (int)entrada.size(); i++) {
+        for (int i = 0; i < entrada.size(); i++) {
             x = entrada.get(i);
             y = salida.get(i);
             columna = simbolos.indexOf(x);
@@ -116,6 +116,7 @@ public class Canal {
     
     public double ruidoPorMuestreo(double[][] mTransicion, Vector<SimboloProbabilidad> probabilidadesX) {
 
+        
         int convergencia = -1;
         int muestras = 0;
 
@@ -152,6 +153,8 @@ public class Canal {
                        
         while (!converge(ruidoAct, ruidoAnt) || muestras < NUM_MIN_MUESTRAS) {
            
+            if(converge(ruidoAct,ruidoAnt))
+                System.out.print( "Converge en : "+muestras+"\n" );
             x = generarXRandom(probabilidadX);
             y = generarYdadoX(mAcum, simbolos.indexOf(x));
             columna = simbolos.indexOf(x);

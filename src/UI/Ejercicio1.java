@@ -16,11 +16,11 @@ public class Ejercicio1 extends javax.swing.JDialog {
     public Ejercicio1(javax.swing.JDialog parent, boolean modal, Vector<Imagen> datos) {
         super(parent, modal);
         initComponents();
-        txt1.setText(datos.elementAt(0).name + " con Factor de Correlacion: " + datos.elementAt(0).correlacionConOriginal);
-        txt2.setText(datos.elementAt(1).name + " con Factor de Correlacion: " + datos.elementAt(1).correlacionConOriginal);
-        txt3.setText(datos.elementAt(2).name + " con Factor de Correlacion: " + datos.elementAt(2).correlacionConOriginal);
-        txt4.setText(datos.elementAt(3).name + " con Factor de Correlacion: " + datos.elementAt(3).correlacionConOriginal);
-        txt5.setText(datos.elementAt(4).name + " con Factor de Correlacion: " + datos.elementAt(4).correlacionConOriginal); 
+        txt1.setText(datos.elementAt(0).name + " con Factor de Correlacion: " + String.format( "%.4f",datos.elementAt(0).correlacionConOriginal));
+        txt2.setText(datos.elementAt(1).name + " con Factor de Correlacion: " + String.format( "%.4f",datos.elementAt(1).correlacionConOriginal));
+        txt3.setText(datos.elementAt(2).name + " con Factor de Correlacion: " + String.format( "%.4f",datos.elementAt(2).correlacionConOriginal));
+        txt4.setText(datos.elementAt(3).name + " con Factor de Correlacion: " + String.format( "%.4f",datos.elementAt(3).correlacionConOriginal));
+        txt5.setText(datos.elementAt(4).name + " con Factor de Correlacion: " + String.format( "%.4f", datos.elementAt(4).correlacionConOriginal)); 
     }
 
     private Ejercicio1(JDialog jDialog, boolean b) {
