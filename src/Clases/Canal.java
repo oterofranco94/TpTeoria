@@ -13,7 +13,8 @@ import java.util.Vector;
  * @author fs
  */
 public class Canal {
-    private Vector<Double> errorList = new Vector<Double>();
+
+    //private Vector<Double> errorList = new Vector<Double>();
     private Vector<Integer> entrada;
     private Vector<Integer> salida;
     private Vector<Integer> simbolos;
@@ -95,29 +96,25 @@ public class Canal {
     }
 
     private boolean converge(double probAnt, double probAct) {
-        
-         return (Math.abs(probAnt - probAct) < EPSILON) ;
-                    
-            
-        
+
+        return (Math.abs(probAnt - probAct) < EPSILON);
+
     }
 
-    private double calcularRuido (double [] [] matrizConjunta){
+    private double calcularRuido(double[][] matrizConjunta) {
         double ruido = 0;
-        for(int i= 0;i<colores;i++){
-            for(int j=0;j<colores;j++){
-                if (matrizConjunta[i][j] != 0.0)
-                    ruido += Math.abs( matrizConjunta [i][j] * (Math.log10(matrizConjunta [i][j]) / Math.log10(2) ));
+        for (int i = 0; i < colores; i++) {
+            for (int j = 0; j < colores; j++) {
+                if (matrizConjunta[i][j] != 0.0) {
+                    ruido += Math.abs(matrizConjunta[i][j] * (Math.log10(matrizConjunta[i][j]) / Math.log10(2)));
+                }
             }
         }
         return (ruido);
     }
-    
-    
+
     public double ruidoPorMuestreo(double[][] mTransicion, Vector<SimboloProbabilidad> probabilidadesX) {
 
-        
-        int convergencia = -1;
         int muestras = 0;
 
         double[] probabilidadX = probabilidadAcumulada(probabilidadesX);
@@ -125,12 +122,12 @@ public class Canal {
         double[][] mAcum = new double[colores][colores];
 
         double ruidoAct = 0;
-        
+
         double ruidoAnt = -1;
-        
+
         double[][] probConjunta = new double[colores][colores];
-        
-        int[][] apariciones = new int [colores][colores];
+
+        int[][] apariciones = new int[colores][colores];
 
         // Calculo probabilidad acumulada
         for (int i = 0; i < colores; i++) {
@@ -138,8 +135,8 @@ public class Canal {
             for (int j = 0; j < colores; j++) {
                 parcial += mTransicion[j][i];
                 mAcum[j][i] = parcial;
-                probConjunta [i] [j] = 0;
-                apariciones [i][j] = 0;
+                probConjunta[i][j] = 0;
+                apariciones[i][j] = 0;
             }
         }
 
@@ -147,56 +144,53 @@ public class Canal {
         Integer y;
         int fila;
         int columna;
-        double [] error = new double [100];
+        double[] error = new double[100];
         int index = 0;
-        
-                       
+
         while (!converge(ruidoAct, ruidoAnt) || muestras < NUM_MIN_MUESTRAS) {
-           
-            if(converge(ruidoAct,ruidoAnt))
-                System.out.print( "Converge en : "+muestras+"\n" );
+
+            if (converge(ruidoAct, ruidoAnt)) {
+                System.out.print("Converge en : " + muestras + "\n");
+            }
             x = generarXRandom(probabilidadX);
             y = generarYdadoX(mAcum, simbolos.indexOf(x));
             columna = simbolos.indexOf(x);
             fila = simbolos.indexOf(y);
-            apariciones [fila][columna] ++;
+            apariciones[fila][columna]++;
             muestras++;
-            
-            for (int i=0;i<colores;i++){
-                for (int j=0;j<colores;j++){
-                    probConjunta [i][j] = (double)apariciones [i] [j] / muestras;
+
+            for (int i = 0; i < colores; i++) {
+                for (int j = 0; j < colores; j++) {
+                    probConjunta[i][j] = (double) apariciones[i][j] / muestras;
                 }
             }
-            ruidoAnt = ruidoAct; 
-            ruidoAct = calcularRuido (probConjunta);
-            errorList.add(ruidoAct-ruidoAnt);
+            ruidoAnt = ruidoAct;
+            ruidoAct = calcularRuido(probConjunta);
         }
-        
-        System.out.println(this.errorList);
-        System.out.println(this.errorList.size());
-        
+
         return ruidoAct;
-        
 
     }
 
-    private Integer generarXRandom(double[] probabilidadX){
-    
-            double r = Math.random();
-            for (int i=0;i<colores;i++){
-                if (r<probabilidadX[i])
-                    return simbolos.get(i);
+    private Integer generarXRandom(double[] probabilidadX) {
+
+        double r = Math.random();
+        for (int i = 0; i < colores; i++) {
+            if (r < probabilidadX[i]) {
+                return simbolos.get(i);
             }
-         return -1;       
-}
-    
-   private Integer generarYdadoX (double [] [] mAcum, int columna){
-       double r=Math.random();
-       for (int i = 0;i<colores;i++){
-           if (r< mAcum [i][columna])
-               return simbolos.get(i);
-       }
-       return -1;
-   }
-   
+        }
+        return -1;
+    }
+
+    private Integer generarYdadoX(double[][] mAcum, int columna) {
+        double r = Math.random();
+        for (int i = 0; i < colores; i++) {
+            if (r < mAcum[i][columna]) {
+                return simbolos.get(i);
+            }
+        }
+        return -1;
+    }
+
 }
