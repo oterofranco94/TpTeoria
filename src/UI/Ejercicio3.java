@@ -244,30 +244,30 @@ public class Ejercicio3 extends javax.swing.JFrame {
     long longitud1 = new File(archivo1).length();
     lista.add(Double.valueOf(longitud1));
     
-    String archivo2 = "../TpTeoInfo/generados/compresionOriginal.txt";
+    String archivo2 = "../TpTeoInfo/generados/comprimidoOriginal.txt";
     long longitud2 = new File(archivo2).length();
     lista.add(Double.valueOf(longitud2));
     
-    String archivo3 = "../TpTeoInfo/src/Imagenes/Will_1.txt";
+    String archivo3 = "../TpTeoInfo/src/Imagenes/Will_1.bmp";
     long longitud3 = new File(archivo3).length();
     lista.add(Double.valueOf(longitud3));
     
-    String archivo4 = "../TpTeoInfo/generados/compresionMasParecido.txt";
+    String archivo4 = "../TpTeoInfo/generados/comprimidoMasParecido.txt";
     long longitud4 = new File(archivo4).length();
     lista.add(Double.valueOf(longitud4));
     
-    String archivo5 = "../TpTeoInfo/src/Imagenes/Will_ej2.txt";
+    String archivo5 = "../TpTeoInfo/src/Imagenes/Will_ej2.bmp";
     long longitud5 = new File(archivo5).length();
     lista.add(Double.valueOf(longitud5));
     
-    String archivo6 = "../TpTeoInfo/generados/compresionImgPolicia1.txt";
+    String archivo6 = "../TpTeoInfo/generados/comprimidoImgPolicia1.txt";
     long longitud6 = new File(archivo6).length();
     lista.add(Double.valueOf(longitud6));
     
-    String archivo7 = "../TpTeoInfo/generados/compresionImgPolicia2.txt";
+    String archivo7 = "../TpTeoInfo/generados/comprimidoImgPolicia2.txt";
     long longitud7 = new File(archivo7).length();
     lista.add(Double.valueOf(longitud7));
-    
+
     Vector<Double> resultado = new Vector<Double>();
     resultado.add(lista.elementAt(0)/lista.elementAt(1));
     resultado.add(lista.elementAt(2)/lista.elementAt(3));

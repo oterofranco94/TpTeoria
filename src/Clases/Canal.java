@@ -13,7 +13,7 @@ import java.util.Vector;
  * @author fs
  */
 public class Canal {
-
+    private Vector<Double> errorList = new Vector<Double>();
     private Vector<Integer> entrada;
     private Vector<Integer> salida;
     private Vector<Integer> simbolos;
@@ -116,7 +116,7 @@ public class Canal {
     
     public double ruidoPorMuestreo(double[][] mTransicion, Vector<SimboloProbabilidad> probabilidadesX) {
 
-
+        int convergencia = -1;
         int muestras = 0;
 
         double[] probabilidadX = probabilidadAcumulada(probabilidadesX);
@@ -149,9 +149,7 @@ public class Canal {
         double [] error = new double [100];
         int index = 0;
         
-        
-        //Vector<Integer> errorList = new Vector<Integer>;
-                
+                       
         while (!converge(ruidoAct, ruidoAnt) || muestras < NUM_MIN_MUESTRAS) {
            
             x = generarXRandom(probabilidadX);
@@ -168,8 +166,11 @@ public class Canal {
             }
             ruidoAnt = ruidoAct; 
             ruidoAct = calcularRuido (probConjunta);
+            errorList.add(ruidoAct-ruidoAnt);
         }
         
+        System.out.println(this.errorList);
+        System.out.println(this.errorList.size());
         
         return ruidoAct;
         
