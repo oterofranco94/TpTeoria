@@ -148,10 +148,6 @@ public class Canal {
         int index = 0;
 
         while (!converge(ruidoAct, ruidoAnt) || muestras < NUM_MIN_MUESTRAS) {
-
-            if (converge(ruidoAct, ruidoAnt)) {
-                System.out.print("Converge en : " + muestras + "\n");
-            }
             x = generarXRandom(probabilidadX);
             y = generarYdadoX(mAcum, simbolos.indexOf(x));
             columna = simbolos.indexOf(x);
